@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css2/index2.css" type="text/css"></link>
+<script type="text/javascript" src="plugins/angularjs/angular.min.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/controller/goodsController.js"></script>
+<script type="text/javascript" src="js/service/goodsService.js"></script>
+
+</head>
+<body ng-app="myApp" ng-controller="goodsController" ng-init="getList()">
+<button ng-click="tegezer()">商品同步</button>
+<button><a href="/solrlist.html">查询商品</a></button>
+<table>
+     <tr>
+          <td>编号</td>
+          <td>商品名称</td>
+          <td>价格</td>
+          <td>品牌</td>
+          <td>店铺</td>
+          <td>数量</td>
+          <td>上架时间</td>
+          <td>审核状态</td>
+          <td>操作</td>
+     </tr>
+     <tr ng-repeat="p in list">
+          <td>{{$index+1}}</td>
+          <td>{{p.name}}</td>
+          <td>{{p.price}}</td>
+          <td>{{p.brand}}</td>
+          <td>{{p.shop}}</td>
+          <td>{{p.num}}</td>
+          <td>{{p.uptime}}</td>
+          <td ng-if="p.zt==0">
+                             待审核
+          </td>
+           <td ng-if="p.zt==1">
+                             已审核
+          </td>
+           <td ng-if="p.zt==2">
+                             已驳回
+          </td>
+          <td ng-if="p.zt==0">
+              <button ng-click="out(p.id)">通过</button>
+              <button ng-click="back(p.id)">驳回</button>
+          </td>
+     </tr>
+</table>
+</body>
+</html>
